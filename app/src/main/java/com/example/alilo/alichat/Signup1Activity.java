@@ -15,13 +15,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class Signup1Activity extends AppCompatActivity {
 
-    private EditText inputEmail, inputPassword;
+    private EditText inputEmail, inputPassword,inputName;
     private Button btnSignIn , btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,7 @@ public class Signup1Activity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
+        inputName = (EditText) findViewById(R.id.name);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
 
@@ -89,6 +96,18 @@ public class Signup1Activity extends AppCompatActivity {
                                     Toast.makeText(Signup1Activity.this, "Authentication failed." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+
+                                    FirebaseUser CurenUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                                    String Wid = CurenUser.getUid();
+                                    databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(Wid);
+
+                                    HashMap<String,String> UserHashMap = new HashMap<String, String>() ;
+                                    UserHashMap.put("name",inputName.getText().toString()) ;
+                                    UserHashMap.put("statut","hi there i am using the aplication chat ") ;
+                                    UserHashMap.put("image","default") ;
+                                    UserHashMap.put("thumb_image","default") ;
+
+                                    databaseReference.setValue(UserHashMap) ;
                                     startActivity(new Intent(Signup1Activity.this, MainActivity.class));
                                     finish();
                                 }
