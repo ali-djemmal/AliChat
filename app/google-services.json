@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "753323656947",
+    "firebase_url": "https://appchat-f8f87.firebaseio.com",
+    "project_id": "appchat-f8f87",
+    "storage_bucket": "appchat-f8f87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753323656947:android:93a3748b384020f9",
+        "android_client_info": {
+          "package_name": "com.example.alilo.alichat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753323656947-iufe04hpb4ghl5ckmjdeen38v67kkdnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsK3l1O-VqEWtunfgubvU5BVPdEGrqCWQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
