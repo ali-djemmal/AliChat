@@ -20,39 +20,43 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Button"
+    <TextView
+        android:text="Disbale name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
-
-    <TextView
-        android:text=""
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
         android:id="@+id/textView"
-        android:layout_below="@+id/profile_image"
+        android:textSize="27dp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="TextView"
-        android:layout_width="100dp"
+        android:text="@string/hi_there_i_am_here"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="38dp"
         android:id="@+id/textView2"
+      android:gravity="center"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="Change image"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@color/common_google_signin_btn_text_dark_default"
         android:id="@+id/button2"
+        android:layout_marginTop="39dp"
         android:layout_below="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_marginTop="60dp" />
+        android:layout_alignStart="@+id/button3" />
+
+    <Button
+        android:text="Change Status"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:id="@+id/button3"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
