@@ -1,5 +1,6 @@
 package com.example.alilo.alichat;
 
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -37,11 +38,13 @@ private EditText Newsatus;
 
         Newsatus =(EditText) findViewById(R.id.newstatus) ;
         mSaveButton= (Button)  findViewById(R.id.SaveB) ;
+Newsatus.setText(getIntent().getStringExtra("status"));
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (progressBar != null) {
-                    progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
                 }
                 String statu = Newsatus.getText().toString();
                 databaseReference.child("statut").setValue(statu).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -49,6 +52,7 @@ private EditText Newsatus;
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             progressBar.setVisibility(View.GONE);
+
                         }
                     }
                 });

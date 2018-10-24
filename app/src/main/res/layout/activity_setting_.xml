@@ -9,15 +9,34 @@
 
     tools:context="com.example.alilo.alichat.Setting_Activity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:src="@android:drawable/stat_sys_vp_phone_call_on_hold"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"
-        android:layout_marginTop="39dp"
-        android:layout_alignParentTop="true"
+    <Button
+        android:text="Change Status"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:id="@+id/changeStatus"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/changeImg"
+        android:layout_alignStart="@+id/changeImg" />
+
+    <Button
+        android:text="Change image"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@color/common_google_signin_btn_text_dark_default"
+        android:id="@+id/changeImg"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/hi_there_i_am_here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+      android:gravity="center"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -29,34 +48,16 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="@string/hi_there_i_am_here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-        android:id="@+id/textView2"
-      android:gravity="center"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="Change image"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:background="@color/common_google_signin_btn_text_dark_default"
-        android:id="@+id/button2"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/button3" />
-
-    <Button
-        android:text="Change Status"
-        android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:background="@color/colorAccent"
-        android:id="@+id/button3"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/button2"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@android:drawable/stat_sys_vp_phone_call_on_hold"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        android:layout_marginTop="31dp"
+        android:foregroundGravity="center"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
