@@ -10,8 +10,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- To setup image storige -->
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +30,11 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Setting_Activity" />
-        <activity android:name=".StatusActivity"></activity>
+        <activity android:name=".StatusActivity" />
+        <activity
+            android:name=".AllUsersActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ProfilActivity"></activity>
     </application>
 
 </manifest>

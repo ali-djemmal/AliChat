@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class StatusActivity extends AppCompatActivity {
 private EditText Newsatus;
     private Button mSaveButton ;
- private DatabaseReference databaseReference ;
+ private DatabaseReference databaseReference ,databaseReference2 ;
     private FirebaseUser mCurenntuser ;
     private ProgressBar progressBar;
 
@@ -35,18 +36,24 @@ private EditText Newsatus;
         mCurenntuser = FirebaseAuth.getInstance().getCurrentUser();
         String Current_id = mCurenntuser.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(Current_id) ;
+      //  databaseReference2 = FirebaseDatabase.getInstance().getReference("chat") ;
 
         Newsatus =(EditText) findViewById(R.id.newstatus) ;
         mSaveButton= (Button)  findViewById(R.id.SaveB) ;
-Newsatus.setText(getIntent().getStringExtra("status"));
+        Newsatus.setText(getIntent().getStringExtra("status"));
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+                Toast.makeText(StatusActivity.this, "test", Toast.LENGTH_SHORT).show();
 
                 if (progressBar != null) {
                     progressBar.setVisibility(View.VISIBLE);
                 }
                 String statu = Newsatus.getText().toString();
+                databaseReference.setValue(statu) ;
                 databaseReference.child("statut").setValue(statu).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.data.BitmapTeleporter;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,11 +26,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -85,8 +79,14 @@ private DatabaseReference mUserDatabases;
 
                  mName.setText(name);
                  mstatus.setText(statut);
+if (image.equalsIgnoreCase("default")){
+                Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.defaumag).into(circleImageView) ;
 
+}  else{
+    Picasso.with(getApplicationContext()).load(image).into(circleImageView) ;
+}
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -99,7 +99,7 @@ private DatabaseReference mUserDatabases;
             @Override
             public void onClick(View view) {
                 chooseImage();
-             
+
 
             }
         });
@@ -160,13 +160,15 @@ private DatabaseReference mUserDatabases;
             progressDialog.show();
 
           //  StorageReference ref = storageRefer.child("images/"+ UUID.randomUUID().toString());
-            StorageReference Filepath = mStorageRef.child("profile_images").child(UUID.randomUUID().toString()+"ffff") ;
+            StorageReference Filepath = mStorageRef.child("profile_images").child(mCurentUser.getUid()+".jpeg") ;
             Filepath.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
                             Toast.makeText(Setting_Activity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                            String Url_image=taskSnapshot.getDownloadUrl().toString();
+                            mUserDatabases.child("image").setValue(Url_image) ;
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -193,7 +195,7 @@ private DatabaseReference mUserDatabases;
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-        uploadImage();
+
     }
 
     @Override
@@ -203,7 +205,9 @@ private DatabaseReference mUserDatabases;
                 && data != null && data.getData() != null )
         {
             filePath = data.getData();
+
             try {
+                uploadImage();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 circleImageView.setImageBitmap(bitmap);
             }

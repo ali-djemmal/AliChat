@@ -307,6 +307,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+        if(item.getItemId()== R.id.menu_aalUser_id){
+            Intent settingIntent = new Intent(MainActivity.this, AllUsersActivity.class);
+            startActivity(settingIntent);
+
+
+        }
 
 
         return super.onOptionsItemSelected(item);
