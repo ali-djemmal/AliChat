@@ -1,6 +1,7 @@
 package com.example.alilo.alichat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,13 +35,23 @@ private RecyclerView mRecyclerView ;
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Users ,UsersVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersVeiwHolder>(Users.class,R.layout.users_layout,
+        final FirebaseRecyclerAdapter<Users ,UsersVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersVeiwHolder>(Users.class,R.layout.users_layout,
                 UsersVeiwHolder.class,mDatabaseReference) {
             @Override
             protected void populateViewHolder(UsersVeiwHolder viewHolder, Users model, int position) {
                 viewHolder.setName(model.getName());
                 viewHolder.setStatu(model.getStatut());
                 viewHolder.setImage(model.getImage(),getApplicationContext());
+// go tobprofile detaill
+                final String User_id = getRef(position).getKey();//get user id
+                viewHolder.view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent profileIntent = new Intent(AllUsersActivity.this,ProfilActivity.class);
+                        profileIntent.putExtra("userId",User_id);
+                        startActivity(profileIntent);
+                    }
+                });
             }
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
