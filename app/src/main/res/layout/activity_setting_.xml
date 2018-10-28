@@ -26,24 +26,24 @@
         android:background="@color/common_google_signin_btn_text_dark_default"
         android:id="@+id/changeImg"
         android:layout_marginTop="48dp"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/Statusprof"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="@string/hi_there_i_am_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/Statusprof"
       android:gravity="center"
         android:layout_marginTop="29dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/mProfilenameid"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:text="Disbale name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/mProfilenameid"
         android:textSize="27dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

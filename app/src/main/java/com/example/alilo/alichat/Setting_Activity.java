@@ -51,8 +51,8 @@ private DatabaseReference mUserDatabases;
         mStorageRef = FirebaseStorage.getInstance().getReference();        //5555555555555555555555555555555
 
         circleImageView =(CircleImageView) findViewById(R.id.profile_image);
-        mName =(TextView) findViewById(R.id.textView);
-        mstatus =(TextView) findViewById(R.id.textView2);
+        mName =(TextView) findViewById(R.id.mProfilenameid);
+        mstatus =(TextView) findViewById(R.id.Statusprof);
 
         chSButton =(Button) findViewById(R.id.changeStatus) ;
         chatButton =(Button) findViewById(R.id.changeImg) ;
