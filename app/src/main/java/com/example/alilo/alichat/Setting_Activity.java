@@ -26,6 +26,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -66,7 +68,7 @@ private DatabaseReference mUserDatabases;
         mCurentUser = FirebaseAuth.getInstance().getCurrentUser();
         String curent_uId= mCurentUser.getUid();
         mUserDatabases= FirebaseDatabase.getInstance().getReference().child("Users").child(curent_uId);
-
+        mUserDatabases.keepSynced(true);
 
 
         mUserDatabases.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -80,7 +82,17 @@ private DatabaseReference mUserDatabases;
                  mName.setText(name);
                  mstatus.setText(statut);
 if (image.equalsIgnoreCase("default")){
-                Picasso.with(getApplicationContext()).load(image).placeholder(R.drawable.defaumag).into(circleImageView) ;
+                Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.defaumag).into(circleImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                }) ;
 
 }  else{
     Picasso.with(getApplicationContext()).load(image).into(circleImageView) ;

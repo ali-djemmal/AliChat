@@ -12,11 +12,12 @@
         android:id="@+id/profile_image"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@android:drawable/stat_sys_vp_phone_call_on_hold"
+        android:src="@drawable/com_facebook_profile_picture_blank_square"
 
         android:foregroundGravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        />
 
     <TextView
         android:text="@string/hi_there_i_am_here"
@@ -29,13 +30,13 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Button"
+        android:text=" cancal request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/sendId"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
-        android:id="@+id/button3" />
+        android:id="@+id/cancalId" />
 
     <TextView
         android:text="Disbale name"
