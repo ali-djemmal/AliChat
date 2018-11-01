@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,6 +38,7 @@ public class ProfilActivity extends AppCompatActivity {
     private DatabaseReference mUserDatabases ;
     private DatabaseReference mRequestReference ;
     private DatabaseReference mFrienddataReference ;
+    private DatabaseReference mNotificationReference ;
 
 
     private FirebaseUser mCurentUser ;
@@ -59,6 +61,7 @@ public class ProfilActivity extends AppCompatActivity {
         mUserDatabases= FirebaseDatabase.getInstance().getReference().child("Users").child(Uid);
         mRequestReference=FirebaseDatabase.getInstance().getReference().child("Friend_req") ;
         mFrienddataReference = FirebaseDatabase.getInstance().getReference().child("Friends") ;
+        mNotificationReference = FirebaseDatabase.getInstance().getReference().child("Notification") ;
         mcurent_stat ="not_friends" ;
 
         mCurentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -183,11 +186,28 @@ public class ProfilActivity extends AppCompatActivity {
             mRequestReference.child(Uid).child(mCurentUser.getUid()).child("request_type").setValue("received").addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    HashMap<String,String> notificationData = new HashMap<String, String>();
+                    notificationData.put("from",  mCurentUser.getUid());
+                    notificationData.put("type","request") ;
+                    mNotificationReference.child(Uid).push().setValue(notificationData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
 
-                    mcurent_stat="req_sent" ;
-                    msendButton.setText("cancal Freind request");
-                    mcanlButton.setVisibility(View.INVISIBLE);
-                    mcanlButton.setEnabled(false);
+                            mcurent_stat="req_sent" ;
+                            msendButton.setText("cancal Freind request");
+                            mcanlButton.setVisibility(View.INVISIBLE);
+                            mcanlButton.setEnabled(false);
+                        }
+                    });
+
+
+
+
+
+
+
+
+
                     Toast.makeText(ProfilActivity.this, " send request secsuss", Toast.LENGTH_SHORT).show();
                 }
             });

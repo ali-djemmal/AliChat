@@ -12,12 +12,14 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -27,7 +29,7 @@ public class Signup1Activity extends AppCompatActivity {
     private Button btnSignIn , btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, mdatabaseReference ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,10 @@ public class Signup1Activity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        mdatabaseReference= FirebaseDatabase.getInstance().getReference().child("Users");
+
+
+
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
@@ -108,8 +114,18 @@ public class Signup1Activity extends AppCompatActivity {
                                     UserHashMap.put("thumb_image","default") ;
 
                                     databaseReference.setValue(UserHashMap) ;
-                                    startActivity(new Intent(Signup1Activity.this, MainActivity.class));
-                                    finish();
+
+                                    String curent_user_id =auth.getCurrentUser().getUid();
+                                    final String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                                    mdatabaseReference.child(curent_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(Signup1Activity.this, "deviceToken ="+deviceToken, Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(Signup1Activity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
                                 }
                             }
                         });
