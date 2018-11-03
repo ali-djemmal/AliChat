@@ -258,10 +258,10 @@ public class ProfilActivity extends AppCompatActivity {
                 if(mcurent_stat.equalsIgnoreCase("req_received")){
                      final String dateRequesst = DateFormat.getDateTimeInstance().format(new Date());
 
-                    mFrienddataReference.child(mCurentUser.getUid()).child(Uid).setValue(dateRequesst).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    mFrienddataReference.child(mCurentUser.getUid()).child(Uid).child("data").setValue(dateRequesst).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            mFrienddataReference.child(Uid).child(mCurentUser.getUid()).setValue(dateRequesst).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            mFrienddataReference.child(Uid).child(mCurentUser.getUid()).child("data").setValue(dateRequesst).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
 

@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AllUsersActivity extends AppCompatActivity {
-private RecyclerView mRecyclerView ;
+    private RecyclerView mRecyclerView ;
     private DatabaseReference mDatabaseReference ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

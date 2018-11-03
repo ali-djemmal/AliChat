@@ -12,7 +12,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
-
         android:id="@+id/circleImageSingl"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"

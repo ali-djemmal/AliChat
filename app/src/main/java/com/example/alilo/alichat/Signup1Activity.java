@@ -112,20 +112,22 @@ public class Signup1Activity extends AppCompatActivity {
                                     UserHashMap.put("statut","hi there i am using the aplication chat ") ;
                                     UserHashMap.put("image","default") ;
                                     UserHashMap.put("thumb_image","default") ;
-
-                                    databaseReference.setValue(UserHashMap) ;
-
-                                    String curent_user_id =auth.getCurrentUser().getUid();
-                                    final String deviceToken = FirebaseInstanceId.getInstance().getToken();
-                                    mdatabaseReference.child(curent_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    UserHashMap.put("device_token",FirebaseInstanceId.getInstance().getToken());
+                                    databaseReference.setValue(UserHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(Signup1Activity.this, "deviceToken ="+deviceToken, Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(Signup1Activity.this,MainActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                         if(task.isSuccessful()){
+                                             Intent intent = new Intent(Signup1Activity.this,MainActivity.class);
+                                             startActivity(intent);
+                                             finish();
+                                         }
                                         }
                                     });
+
+                               //     Toast.makeText(Signup1Activity.this, "deviceToken = "+deviceToken, Toast.LENGTH_SHORT).show();
+
+                                //    final String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
                                 }
                             }
                         });
