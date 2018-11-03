@@ -38,7 +38,7 @@ public class AliChat extends Application {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot != null){
                 mDatabaseReference.child("online").onDisconnect().setValue(false);
-                    mDatabaseReference.child("online").setValue(true);
+
                 }
 
             }

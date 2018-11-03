@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -75,8 +76,11 @@ public class Frendes_Fragment extends Fragment {
                         String name = dataSnapshot.child("name").getValue().toString();
                         String ThumI = dataSnapshot.child("thumb_image").getValue().toString();
                         String image =  dataSnapshot.child("image").getValue().toString();
+                        String onlineIm =  dataSnapshot.child("online").getValue().toString();
+
                         viewHolder.setName(name);
-                       viewHolder.setImage(image,getContext());
+                        viewHolder.setImage(image,getContext());
+                        viewHolder.setUserOnline(onlineIm);
                     }
 
                     @Override
@@ -111,8 +115,17 @@ public class Frendes_Fragment extends Fragment {
         }
         public void setImage(String image, Context context) {
             CircleImageView imageV = (CircleImageView) view.findViewById(R.id.circleImageSingl);
-            Picasso.with(context).load(image).placeholder(R.drawable.defaumag).into(imageV) ;
+            Picasso.with(context).load(image).placeholder(R.drawable.utilisateur).into(imageV) ;
             //  imageV.setImageURI();
+        }
+
+        public void setUserOnline(String onlineIm) {
+            ImageView userOnlineView = (ImageView)  view.findViewById(R.id.OnlineimageView);
+            if(onlineIm.equalsIgnoreCase("true")){
+                userOnlineView.setVisibility(View.VISIBLE);
+            }else {
+                userOnlineView.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

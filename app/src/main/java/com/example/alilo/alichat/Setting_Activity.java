@@ -82,7 +82,7 @@ private DatabaseReference mUserDatabases;
                  mName.setText(name);
                  mstatus.setText(statut);
 if (image.equalsIgnoreCase("default")){
-                Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.defaumag).into(circleImageView, new Callback() {
+                Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.utilisateur).into(circleImageView, new Callback() {
                     @Override
                     public void onSuccess() {
 

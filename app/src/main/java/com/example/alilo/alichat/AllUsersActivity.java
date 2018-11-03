@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -42,6 +43,7 @@ public class AllUsersActivity extends AppCompatActivity {
                 viewHolder.setName(model.getName());
                 viewHolder.setStatu(model.getStatut());
                 viewHolder.setImage(model.getImage(),getApplicationContext());
+                viewHolder.setInvisibale();
 // go tobprofile detaill
                 final String User_id = getRef(position).getKey();//get user id
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,12 @@ public class AllUsersActivity extends AppCompatActivity {
             super(itemView);
             view=itemView ;
         }
+        public void setInvisibale(){
+       ImageView mageView =(ImageView) view.findViewById(R.id.OnlineimageView);
 
+       mageView.setVisibility(View.INVISIBLE);
+
+            }
         public void setName(String name) {
             TextView Tv_name = (TextView) view.findViewById(R.id.Single);
             Tv_name.setText(name);
@@ -76,8 +83,9 @@ public class AllUsersActivity extends AppCompatActivity {
         }
         public void setImage(String image, Context context) {
             CircleImageView imageV = (CircleImageView) view.findViewById(R.id.circleImageSingl);
-            Picasso.with(context).load(image).into(imageV) ;
-          //  imageV.setImageURI();
+            Picasso.with(context).load(image).placeholder(R.drawable.utilisateur).into(imageV) ;
+
+            //  imageV.setImageURI();
         }
     }
 }
