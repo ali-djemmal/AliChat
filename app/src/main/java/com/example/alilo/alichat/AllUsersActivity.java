@@ -44,7 +44,7 @@ public class AllUsersActivity extends AppCompatActivity {
                 viewHolder.setStatu(model.getStatut());
                 viewHolder.setImage(model.getImage(),getApplicationContext());
                 viewHolder.setInvisibale();
-// go tobprofile detaill
+// go to profile detaill
                 final String User_id = getRef(position).getKey();//get user id
                 viewHolder.view.setOnClickListener(new View.OnClickListener() {
                     @Override

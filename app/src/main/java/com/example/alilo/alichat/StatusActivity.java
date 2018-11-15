@@ -53,7 +53,7 @@ private EditText Newsatus;
                     progressBar.setVisibility(View.VISIBLE);
                 }
                 String statu = Newsatus.getText().toString();
-                databaseReference.setValue(statu) ;
+            //    databaseReference.setValue(statu) ;
                 databaseReference.child("statut").setValue(statu).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

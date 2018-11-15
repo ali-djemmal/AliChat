@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -280,19 +281,52 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(auth.getCurrentUser().getUid());
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+        if(auth.getCurrentUser()!= null){
+
+
+            String curent_uId= auth.getCurrentUser().getUid();
+            mDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(curent_uId);
+
+        }
+
+        FirebaseUser creFirebaseUser= auth.getCurrentUser();
+        if(creFirebaseUser != null){
+
+
+            mDatabaseReference.child("online").setValue(true);
+        }
+
 
         auth.addAuthStateListener(authListener);
-        mDatabaseReference.child("online").setValue(true);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+
+        if(auth.getCurrentUser()!= null){
+
+
+            String curent_uId= auth.getCurrentUser().getUid();
+            mDatabaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(curent_uId);
+
+        }
+
+        FirebaseUser creFirebaseUser= auth.getCurrentUser();
+        if(creFirebaseUser != null){
+
+            mDatabaseReference.child("online").setValue(false);
+            mDatabaseReference.child("lastSeen").setValue(ServerValue.TIMESTAMP);
+        }
+
         if (authListener != null) {
             auth.removeAuthStateListener(authListener);
         }
-        mDatabaseReference.child("online").setValue(false);
+
+
     }
 
 

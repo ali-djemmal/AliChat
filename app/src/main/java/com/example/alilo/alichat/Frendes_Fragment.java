@@ -1,9 +1,12 @@
 package com.example.alilo.alichat;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,9 +70,9 @@ public class Frendes_Fragment extends Fragment {
         final FirebaseRecyclerAdapter<Friends ,FriendsVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Friends, FriendsVeiwHolder>(Friends.class,R.layout.users_layout,
                 FriendsVeiwHolder.class,mDatabaseReference) {
             @Override
-            protected void populateViewHolder(final FriendsVeiwHolder viewHolder, final Friends model, int position) {
+            protected void populateViewHolder(final FriendsVeiwHolder viewHolder, final Friends model, final int position) {
                 viewHolder.setStatu(model.getData());
-                String  List_user_id = getRef(position).getKey();
+                final String  List_user_id = getRef(position).getKey();
                 mDatabaseReferenceUs.child(List_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,6 +84,43 @@ public class Frendes_Fragment extends Fragment {
                         viewHolder.setName(name);
                         viewHolder.setImage(image,getContext());
                         viewHolder.setUserOnline(onlineIm);
+
+//------------------------------------------- dailog in frend list----------------------------------
+
+
+                        viewHolder.view.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                             CharSequence options[]=new CharSequence[]{"Open Profile","Send message"}  ;
+                                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                                builder.setTitle("Select Options");
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        if(i==0){
+                                                    Intent profileIntent = new Intent(getContext(),ProfilActivity.class);
+                                                    profileIntent.putExtra("userId",List_user_id);
+                                                    startActivity(profileIntent);
+                                                }
+
+                                          if(i ==1){
+                                            //  final String User_id = getRef(position).getKey();//get user id
+
+
+
+                                                    Intent ChatIntent = new Intent(getContext(),ChatActivity.class);
+                                                   ChatIntent.putExtra("userId",List_user_id);
+                                                    startActivity(ChatIntent);
+
+
+
+
+
+                                    }}
+                                });
+                                builder.show();
+                            }
+                        });
                     }
 
                     @Override
