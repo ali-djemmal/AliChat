@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView Tvname, TvDesc;
     private CircleImageView mCircleImageView;
     private FirebaseAuth mAuth;
-    private ImageButton mAddButton, mSendButton;
+    private Button mAddButton, mSendButton;
     private EditText mMessText;
     private RecyclerView recyclerView;
     String mCurrentUserId;
@@ -69,8 +70,8 @@ public class ChatActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUserId = mAuth.getCurrentUser().getUid();
 
-        mAddButton = (ImageButton) findViewById(R.id.imageButton);
-        mSendButton = (ImageButton) findViewById(R.id.imageButton2);
+      //  mAddButton = (ImageButton) findViewById(R.id.imageButton);
+        mSendButton = (Button) findViewById(R.id.imageButton2);
         mMessText = (EditText) findViewById(R.id.textView);
 
 
@@ -101,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
-        //  loadMessage();
+         loadMessage();
 
 
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -176,6 +177,41 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    private void loadMessage() {
+        mRootReference.child("messages").child(mCurrentUserId).child(mChatUser).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                message M = new message(dataSnapshot.child("message").getValue().toString(),"eezez",false,0)  ;
+                messageList.add(M);
+                messageAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+    }
+
     private void sendMessage() {
         String message = mMessText.getText().toString();
         if (!TextUtils.isEmpty(message)) {
@@ -205,6 +241,5 @@ public class ChatActivity extends AppCompatActivity {
 
         }
     }
-
 
 }

@@ -26,6 +26,5 @@
         android:background="@drawable/messge_text_bak"
         android:textStyle="normal|bold"
         android:text="hghgh"
-        android:layout_below="@+id/circleImageSingl"
-        android:layout_toEndOf="@+id/circleImageSingl" />
+        android:layout_below="@+id/circleImageSingl" />
 </RelativeLayout>

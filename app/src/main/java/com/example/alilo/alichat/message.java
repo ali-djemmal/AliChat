@@ -6,10 +6,10 @@ package com.example.alilo.alichat;
 
 public class message {
     private String message ,type;
-    private String seen;
-    private String time ;
+    private boolean seen;
+    private long time ;
 
-    public message(String message, String type, String seen, String time) {
+    public message(String message, String type, boolean seen, long time) {
         this.message = message;
         this.type = type;
 
@@ -22,7 +22,7 @@ public class message {
     }
 
 
-    public String isSeen() {
+    public boolean isSeen() {
         return seen;
     }
 
@@ -34,19 +34,19 @@ public class message {
         this.message = message;
     }
 
-    public String getSeen() {
+    public boolean getSeen() {
         return seen;
     }
 
-    public void setSeen(String seen) {
+    public void setSeen(boolean seen) {
         this.seen = seen;
     }
 
-    public String getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 

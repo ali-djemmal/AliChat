@@ -1,50 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_chat"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:background="#ffffff"
+android:layout_width="match_parent"
+android:id="@+id/activity_chat"
+android:layout_height="match_parent">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/id_message_list"
+    android:transcriptMode="alwaysScroll"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_above="@+id/llSend"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" />
+<RelativeLayout
 
+    android:layout_alignParentBottom="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context="com.example.alilo.alichat.ChatActivity"
-    android:orientation="vertical">
-    <android.support.v7.widget.RecyclerView
+    android:background="#ffffff"
+    android:paddingTop="5dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_height="wrap_content" >
+    <EditText
+        android:id="@+id/textView"
+        android:layout_toLeftOf="@+id/btSend"
+        android:layout_alignBottom="@+id/btSend"
         android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_height="450dp"
-        android:id="@+id/id_message_list" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:weightSum="1">
-
-        <ImageButton
-            android:layout_width="49dp"
-            android:background="#ffffff"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_add_black_18dp"
-            android:id="@+id/imageButton" />
-
-        <EditText
-           android:hint="ecrire votre message ...."
-            android:layout_height="match_parent"
-            android:id="@+id/textView"
-            android:layout_weight="0.95"
-            android:layout_width="match_parent" />
-
-        <ImageButton
-            android:background="#ffffff"
-
-            android:layout_width="56dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_send_black_18dp"
-            android:id="@+id/imageButton2" />
-    </LinearLayout>
-
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:hint="messagiiing ...."
+        android:inputType="textShortMessage"
+        android:imeOptions="actionSend"
+        />
+    <Button
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:paddingRight="10dp"
+        android:layout_alignParentRight="true"
+android:text="send"
+        android:textSize="18sp" >
+    </Button>
+</RelativeLayout>
+</RelativeLayout>
