@@ -2,6 +2,7 @@ package com.example.alilo.alichat;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.NetworkPolicy;
@@ -40,6 +42,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private String mChatUser;
     private DatabaseReference mDatabaseReference, mRootReference, mMessageDatabaseReference;
+    private SwipeRefreshLayout mSwipeRefreshLayout ;
 
     private TextView Tvname, TvDesc;
     private CircleImageView mCircleImageView;
@@ -51,11 +54,16 @@ public class ChatActivity extends AppCompatActivity {
     private final List<message> messageList = new ArrayList<>();
     private LinearLayoutManager linearLayoutManager;
     private MyrecycleViewAdapterS messageAdapter;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private static  final int LIMIT_MESSAG = 10;
+    int curentPage =1;
+
+
+
+
+
+
+
+
 
 
     @Override
@@ -70,7 +78,7 @@ public class ChatActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mCurrentUserId = mAuth.getCurrentUser().getUid();
 
-      //  mAddButton = (ImageButton) findViewById(R.id.imageButton);
+        //  mAddButton = (ImageButton) findViewById(R.id.imageButton);
         mSendButton = (Button) findViewById(R.id.imageButton2);
         mMessText = (EditText) findViewById(R.id.textView);
 
@@ -93,6 +101,7 @@ public class ChatActivity extends AppCompatActivity {
 
         messageAdapter = new MyrecycleViewAdapterS(getApplicationContext(), messageList);
         recyclerView = (RecyclerView) findViewById(R.id.id_message_list);
+        mSwipeRefreshLayout =(SwipeRefreshLayout)  findViewById(R.id.swipView);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
@@ -102,7 +111,10 @@ public class ChatActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(messageAdapter);
-         loadMessage();
+
+
+
+        loadMessage();
 
 
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -116,11 +128,11 @@ public class ChatActivity extends AppCompatActivity {
                 if (statut.equalsIgnoreCase("true")) {
                     TvDesc.setText("Online");
                 } else {
-                    GetTimeAgo getTimeAgo = new GetTimeAgo();
+                   /* GetTimeAgo getTimeAgo = new GetTimeAgo();
                     long lastTime = Long.parseLong(statut);
                     String lastSeenTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
 
-                    TvDesc.setText(lastSeenTime);
+                    TvDesc.setText(lastSeenTime);*/
                 }
 
                 mRootReference.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
@@ -171,19 +183,31 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                curentPage++;
+                messageList.clear();
+                loadMessage();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+            }
+        });
+
+
 
     }
 
     private void loadMessage() {
-        mRootReference.child("messages").child(mCurrentUserId).child(mChatUser).addChildEventListener(new ChildEventListener() {
+        DatabaseReference messagelistReference = mRootReference.child("messages").child(mCurrentUserId).child(mChatUser);
+        Query mQuery = messagelistReference.limitToLast(curentPage * LIMIT_MESSAG);
+        mQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                message M = new message(dataSnapshot.child("message").getValue().toString(),"eezez",false,0)  ;
+                message M = new message(dataSnapshot.child("message").getValue().toString(),"ttt","eezez", false, 0);
                 messageList.add(M);
                 messageAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(messageList.size()-1);
+                mSwipeRefreshLayout.setRefreshing(false);
 
             }
 
@@ -209,7 +233,6 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     private void sendMessage() {
@@ -226,6 +249,7 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("seen", false);
             messageMap.put("type", "text");
             messageMap.put("time", ServerValue.TIMESTAMP);
+            messageMap.put("from", mCurrentUserId);
             Map messgeUserMap = new HashMap();
             messgeUserMap.put(current_user_ref + "/" + push_id, messageMap);
             messgeUserMap.put(chat_user_ref + "/" + push_id, messageMap);

@@ -5,14 +5,14 @@ package com.example.alilo.alichat;
  */
 
 public class message {
-    private String message ,type;
+    private String message ,type,from;
     private boolean seen;
     private long time ;
 
-    public message(String message, String type, boolean seen, long time) {
+    public message(String message, String type,String from, boolean seen, long time) {
         this.message = message;
         this.type = type;
-
+        this.from = from ;
         this.seen = seen;
         this.time = time;
     }
@@ -21,6 +21,13 @@ public class message {
     public message() {
     }
 
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
 
     public boolean isSeen() {
         return seen;
