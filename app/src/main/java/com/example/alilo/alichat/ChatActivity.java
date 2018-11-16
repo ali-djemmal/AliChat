@@ -203,7 +203,7 @@ public class ChatActivity extends AppCompatActivity {
         mQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                message M = new message(dataSnapshot.child("message").getValue().toString(),"ttt","eezez", false, 0);
+                message M = new message(dataSnapshot.child("message").getValue().toString(),"fff",dataSnapshot.child("from").getValue().toString(), false, 0);
                 messageList.add(M);
                 messageAdapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(messageList.size()-1);

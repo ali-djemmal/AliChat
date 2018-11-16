@@ -67,6 +67,32 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
 
         }
          holder.tvdescr.setText(messagesList.get(position).getMessage());
+       // holder.displayName.setText(messagesList.get(position).getFrom());
+
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(messagesList.get(position).getFrom());
+
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String name = dataSnapshot.child("name").getValue().toString();
+                String image = dataSnapshot.child("image").getValue().toString();
+
+                holder.displayName.setText(name);
+
+            /*    Picasso.with(holder.profileImage.getContext()).load(image)
+                        .placeholder(R.drawable.defaumag).into(holder.profileImage);*/
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference();
         // holder.displayName.setText();
