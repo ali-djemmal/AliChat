@@ -31,15 +31,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Chat_Fragment extends Fragment {
 
     private RecyclerView mConvList;
-
     private DatabaseReference mConvDatabase;
     private DatabaseReference mMessageDatabase;
     private DatabaseReference mUsersDatabase;
-
     private FirebaseAuth mAuth;
-
     private String mCurrent_user_id;
-
     private View mMainView;
 
 
