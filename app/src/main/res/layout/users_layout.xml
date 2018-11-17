@@ -27,14 +27,6 @@
         android:layout_marginEnd="131dp" />
 
     <TextView
-        android:text="User default status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Status"
-        android:layout_alignBottom="@+id/circleImageSingl"
-        android:layout_alignStart="@+id/Single" />
-
-    <TextView
         android:text="Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,4 +37,12 @@
         android:layout_marginStart="33dp"
         android:layout_alignBottom="@+id/OnlineimageView"
         android:layout_toEndOf="@+id/circleImageSingl" />
+
+    <TextView
+        android:text="User default status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Status"
+        android:layout_below="@+id/Single"
+        android:layout_alignStart="@+id/Single" />
 </RelativeLayout>

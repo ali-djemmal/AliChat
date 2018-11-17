@@ -58,6 +58,11 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
 
         String crent_userid = mAuth.getCurrentUser().getUid();
         String userfrom = messagesList.get(position).getFrom();
+        String message_type = messagesList.get(position).getType();
+
+
+        //-----------------------------------------------------------------------------
+
         if(crent_userid.equals(userfrom)){
             holder.tvdescr.setBackgroundColor(Color.WHITE);
             holder.tvdescr.setTextColor(Color.BLACK);
@@ -68,6 +73,10 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
         }
          holder.tvdescr.setText(messagesList.get(position).getMessage());
        // holder.displayName.setText(messagesList.get(position).getFrom());
+
+
+        //*--------------------------------------------------------------------------------------------
+
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(messagesList.get(position).getFrom());
 
@@ -80,8 +89,8 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
 
                 holder.displayName.setText(name);
 
-            /*    Picasso.with(holder.profileImage.getContext()).load(image)
-                        .placeholder(R.drawable.defaumag).into(holder.profileImage);*/
+              Picasso.with(holder.profileImage.getContext()).load(image)
+                        .placeholder(R.drawable.defaumag).into(holder.profileImage);
 
             }
 
@@ -112,7 +121,18 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
 
 
 
+        if(message_type.equals("text")) {
 
+            holder.tvdescr.setText(messagesList.get(position).getMessage());
+            holder.messageImage.setVisibility(View.INVISIBLE);
+
+
+        } else {
+
+            holder.tvdescr.setVisibility(View.INVISIBLE);
+            Picasso.with(holder.profileImage.getContext()).load(messagesList.get(position).getMessage()).into(holder.messageImage);
+
+        }
 
 
 
@@ -142,7 +162,7 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
 
           //  tv_title=(TextView)  itemView.findViewById(R.id.name);
             tvdescr=(TextView)  v.findViewById(R.id.message_text_layout);
-            profileImage = (CircleImageView) v.findViewById(R.id.circleImageSingl);
+            profileImage = (CircleImageView) v.findViewById(R.id.message_profile_layout);
             displayName = (TextView) v.findViewById(R.id.name_text_layout);
             messageImage = (ImageView) v.findViewById(R.id.message_image_layout);
         }
