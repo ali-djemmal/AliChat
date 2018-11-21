@@ -64,7 +64,7 @@ public class MyrecycleViewAdapterS extends RecyclerView.Adapter<MyrecycleViewAda
         //-----------------------------------------------------------------------------
 
         if(crent_userid.equals(userfrom)){
-            holder.tvdescr.setBackgroundColor(Color.WHITE);
+            holder.tvdescr.setBackgroundResource(R.drawable.back_message_2);
             holder.tvdescr.setTextColor(Color.BLACK);
         }else{
             holder.tvdescr.setBackgroundResource(R.drawable.messge_text_bak);

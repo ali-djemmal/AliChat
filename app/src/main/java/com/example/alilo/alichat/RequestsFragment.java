@@ -57,7 +57,7 @@ public class RequestsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_request, container, false);
-        mAuth =FirebaseAuth.getInstance();
+     /*   mAuth =FirebaseAuth.getInstance();
         mCurrentUserId= mAuth.getCurrentUser().getUid();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friend_req").child(mCurrentUserId);
         mDatabaseReference.keepSynced(true);
@@ -65,7 +65,7 @@ public class RequestsFragment extends Fragment {
         mDatabaseReferenceUs.keepSynced(true);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.requestlist)   ;
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
         return view ;
     }
 
@@ -73,7 +73,7 @@ public class RequestsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        final FirebaseRecyclerAdapter<Request ,FriendsVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Request,FriendsVeiwHolder>(Request.class,R.layout.users_layout,
+/*        final FirebaseRecyclerAdapter<Request ,FriendsVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Request,FriendsVeiwHolder>(Request.class,R.layout.users_layout,
                 FriendsVeiwHolder.class,mDatabaseReference) {
 
 
@@ -144,7 +144,7 @@ public class RequestsFragment extends Fragment {
 
 
         };
-        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);*/
     }
 
 
