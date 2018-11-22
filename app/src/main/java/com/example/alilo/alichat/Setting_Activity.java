@@ -57,7 +57,7 @@ private DatabaseReference mUserDatabases;
         mstatus =(TextView) findViewById(R.id.Statusprof);
 
         chSButton =(Button) findViewById(R.id.changeStatus) ;
-        chatButton =(Button) findViewById(R.id.changeImg) ;
+       // chatButton =(Button) findViewById(R.id.changeImg) ;
 
 
         //Image storage from firebase storage
@@ -79,7 +79,7 @@ private DatabaseReference mUserDatabases;
                 String statut = dataSnapshot.child("statut").getValue().toString() ;
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString() ;
 
-                 mName.setText(name);
+              //   mName.setText(name);
                  mstatus.setText(statut);
             if (image.equalsIgnoreCase("default")){
                 Picasso.with(getApplicationContext()).load(image).networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.utilisateur).into(circleImageView, new Callback() {
@@ -107,7 +107,7 @@ private DatabaseReference mUserDatabases;
         });
 
 
-        chatButton.setOnClickListener(new View.OnClickListener() {
+        mName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chooseImage();
