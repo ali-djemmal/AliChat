@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +34,16 @@ public class Frendes_Fragment extends Fragment {
     private DatabaseReference mDatabaseReferenceUs ;
     private FirebaseAuth mAuth ;
     String mCurrentUserId ;
+
+
+
+
+
+
+
+
+
+
     public Frendes_Fragment() {
         // Required empty public constructor
     }
@@ -52,11 +63,18 @@ public class Frendes_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_frendes_, container, false);
         mAuth =FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+
+
         mCurrentUserId= mAuth.getCurrentUser().getUid();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrentUserId);
         mDatabaseReference.keepSynced(true);
         mDatabaseReferenceUs= FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabaseReferenceUs.keepSynced(true);
+
+
+        }
         mRecyclerView = (RecyclerView) view.findViewById(R.id.frendlist)   ;
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -66,7 +84,8 @@ public class Frendes_Fragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
         final FirebaseRecyclerAdapter<Friends ,FriendsVeiwHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Friends, FriendsVeiwHolder>(Friends.class,R.layout.users_layout,
                 FriendsVeiwHolder.class,mDatabaseReference) {
             @Override
@@ -133,6 +152,7 @@ public class Frendes_Fragment extends Fragment {
 
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
     }
 
 

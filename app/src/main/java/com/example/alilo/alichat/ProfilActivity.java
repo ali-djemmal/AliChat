@@ -52,7 +52,7 @@ public class ProfilActivity extends AppCompatActivity {
         mImageView=(CircleImageView) findViewById(R.id.profile_image) ;
         mProfilename= (TextView) findViewById(R.id.mProfilenameid) ;
         mprofileStatus= (TextView) findViewById(R.id.Statusprof) ;
-        mprofileFrendCount= (TextView) findViewById(R.id.frendscount) ;
+       // mprofileFrendCount= (TextView) findViewById(R.id.frendscount) ;
 
         msendButton =(Button) findViewById(R.id.sendId);
         mcanlButton =(Button) findViewById(R.id.cancalId);
@@ -112,20 +112,6 @@ public class ProfilActivity extends AppCompatActivity {
 
                                     }
                                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             }

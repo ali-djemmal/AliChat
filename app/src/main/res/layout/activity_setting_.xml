@@ -47,9 +47,10 @@
         android:text="Change Status"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/back4"
         android:id="@+id/changeStatus"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="30dp"
+
         android:layout_below="@+id/Statusprof"
         android:layout_centerHorizontal="true" />
 

@@ -19,52 +19,49 @@
         android:layout_alignParentTop="true"
         />
 
-    <TextView
-        android:text="@string/hi_there_i_am_here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Statusprof"
-        android:gravity="center"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/mProfilenameid"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text=" cancal request"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sendId"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:id="@+id/cancalId" />
 
     <TextView
         android:text="Disbale name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mProfilenameid"
+        android:textColor="#ffffff"
         android:textSize="27dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="TextView"
+        android:text="@string/hi_there_i_am_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:id="@+id/frendscount"
-        android:layout_below="@+id/Statusprof"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/Statusprof"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_below="@+id/mProfilenameid"
+        android:layout_alignStart="@+id/sendId" />
 
     <Button
         android:text="send request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
         android:id="@+id/sendId"
         android:textAllCaps="false"
         android:gravity="center"
-        android:layout_below="@+id/frendscount"
+        android:background="@drawable/back3"
+        android:layout_below="@+id/Statusprof"
+        android:elevation="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp" />
+
+    <Button
+        android:text=" cancal request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancalId"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/back4"
+        android:elevation="5dp"
+        android:layout_below="@+id/sendId"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
